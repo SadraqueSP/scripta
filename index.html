@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scripta para Windows</title>
+<meta name="description" content="Bloco de notas para Windows. As notas ficam na sua máquina, o app não cria conta e não usa internet. Baixe o instalador.">
+<meta property="og:title" content="Scripta para Windows">
+<meta property="og:description" content="Um bloco de notas que fica no seu computador. Não cria conta e não manda nada para a internet.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Work+Sans:wght@400;500;600&display=swap">
+<style>
+/* Cores do próprio app (lib/theme/app_palette.dart, tom "warm", acento
+   "ink"): a página tem que parecer a mesma coisa que se vai instalar. */
+:root {
+  --paper: #F8F3E9;
+  --paper-raised: #FFFDF7;
+  --paper-sunk: #F4EDE0;
+  --rule: #BFB39A;
+  --ink: #221F1A;
+  --ink-soft: #6E675B;
+  --accent: #2B4C7E;
+  --accent-ink: #FFFDF7;
+  --warn: #B0562A;
+  --shadow: rgba(34, 31, 26, .09);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1A1813;
+    --paper-raised: #242118;
+    --paper-sunk: #141210;
+    --rule: #585141;
+    --ink: #EAE2D2;
+    --ink-soft: #A9A08D;
+    --accent: #8FB0DC;
+    --accent-ink: #16202E;
+    --warn: #D98B58;
+    --shadow: rgba(0, 0, 0, .4);
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #1A1813;
+  --paper-raised: #242118;
+  --paper-sunk: #141210;
+  --rule: #585141;
+  --ink: #EAE2D2;
+  --ink-soft: #A9A08D;
+  --accent: #8FB0DC;
+  --accent-ink: #16202E;
+  --warn: #D98B58;
+  --shadow: rgba(0, 0, 0, .4);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Work Sans", "Segoe UI", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* A página é uma folha. A linha vertical é a margem do caderno e tudo o
+   que está escrito começa depois dela, como no editor do app. */
+.sheet {
+  max-width: 660px;
+  margin: 0 auto;
+  padding: clamp(32px, 7vw, 72px) clamp(20px, 5vw, 28px) 64px;
+}
+.written {
+  border-left: 1px solid var(--rule);
+  padding-left: clamp(18px, 4vw, 30px);
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
+
+/* A primeira linha da nota vira o título. É assim no app e é assim aqui. */
+.title {
+  font-family: Lora, Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  font-size: clamp(2.1rem, 6vw, 2.9rem);
+  line-height: 1.15;
+  letter-spacing: -.015em;
+  margin: 0;
+  text-wrap: balance;
+}
+.subtitle {
+  font-family: Lora, Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.05rem, 2.6vw, 1.2rem);
+  color: var(--ink-soft);
+  margin: 10px 0 0;
+  max-width: 46ch;
+}
+.eyebrow {
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 12px;
+}
+
+h2 {
+  font-family: Lora, Georgia, serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  margin: 0 0 10px;
+}
+p { margin: 0 0 12px; max-width: 62ch; }
+p:last-child { margin-bottom: 0; }
+
+/* O bloco de baixar é o único objeto sólido da página, porque é o que se
+   veio fazer aqui. Sem cantos arredondados: um carimbo, não um cartão. */
+.download {
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  box-shadow: 0 1px 0 var(--shadow), 0 10px 24px -18px var(--shadow);
+  padding: 26px clamp(18px, 4vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.button {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  align-self: flex-start;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-family: "Work Sans", system-ui, sans-serif;
+  font-size: 1.06rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 13px 26px;
+  border: 1px solid var(--accent);
+}
+.button:hover { filter: brightness(1.08); }
+.button:focus-visible { outline: 3px solid var(--warn); outline-offset: 3px; }
+.build {
+  font-size: .92rem;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+.build b { font-weight: 600; color: var(--ink); }
+
+/* O aviso do Windows: uma lista de tarefas com os mesmos símbolos que o
+   app usa dentro das notas (☐ e ☑). */
+.warning {
+  background: var(--paper-sunk);
+  border-left: 3px solid var(--warn);
+  padding: 20px clamp(16px, 3.5vw, 22px);
+}
+.warning h2 { color: var(--warn); }
+.steps { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
+.steps li {
+  display: grid;
+  grid-template-columns: 1.6em 1fr;
+  align-items: baseline;
+  font-size: .97rem;
+}
+.steps li::before {
+  content: "☐";
+  color: var(--warn);
+  font-size: 1.05em;
+}
+.steps li:last-child::before { content: "☑"; }
+kbd {
+  font-family: inherit;
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule);
+}
+
+.does { display: grid; gap: 14px; }
+.does div { display: grid; grid-template-columns: 1fr; gap: 2px; }
+.does dt { font-weight: 600; }
+.does dd { margin: 0; color: var(--ink-soft); font-size: .96rem; }
+dl { margin: 0; }
+
+.note {
+  font-size: .95rem;
+  color: var(--ink-soft);
+}
+.note b { color: var(--ink); font-weight: 600; }
+
+footer {
+  border-top: 1px solid var(--rule);
+  padding-top: 18px;
+  font-size: .9rem;
+  color: var(--ink-soft);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  justify-content: space-between;
+}
+a { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<main class="sheet">
+  <div class="written">
+
+    <header>
+      <p class="eyebrow">Bloco de notas para Windows</p>
+      <h1 class="title">Scripta</h1>
+      <p class="subtitle">Um bloco de notas que mora no seu computador. Não cria conta, não mostra anúncio e não manda nada para a internet.</p>
+    </header>
+
+    <!-- A CADA VERSÃO NOVA, mude só estas duas linhas: o número e o tamanho. -->
+    <section class="download">
+      <a class="button" href="https://github.com/SadraqueSP/scripta/releases/latest/download/Scripta-Setup.exe">
+        Baixar para Windows
+      </a>
+      <p class="build"><b>Versão 1.4.0</b> &middot; 13 MB &middot; Windows 10 e 11. Instala sem pedir senha de administrador.</p>
+    </section>
+
+    <section class="warning">
+      <h2>O Windows vai reclamar na primeira vez</h2>
+      <p>O instalador não tem assinatura digital. Assinar custa uma taxa por ano, e o app ainda não paga isso. Então o Windows mostra uma tela azul dizendo que protegeu o seu computador. Para instalar mesmo assim:</p>
+      <ul class="steps">
+        <li>Clique em <kbd>Mais informações</kbd>, no meio da tela azul.</li>
+        <li>Clique em <kbd>Executar assim mesmo</kbd>, no botão que apareceu embaixo.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>O que ele faz</h2>
+      <dl class="does">
+        <div>
+          <dt>Escrever</dt>
+          <dd>Negrito, listas, tarefas, tabelas, blocos de código e imagens no meio do texto, que dá para redimensionar. A primeira linha da nota vira o título sozinha.</dd>
+        </div>
+        <div>
+          <dt>Achar depois</dt>
+          <dd>Pastas e subpastas, etiquetas e uma busca que ignora acento e maiúscula. Também tem lembrete, arquivar e lixeira.</dd>
+        </div>
+        <div>
+          <dt>Não perder</dt>
+          <dd>Backup num arquivo só, exportar em PDF, TXT ou imagem, senha por nota e bloqueio do app. Nada disso é pago e nem vai ser.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section>
+      <h2>Onde ficam as suas notas</h2>
+      <p>Numa pasta do seu usuário, na sua máquina. Se você desinstalar o app, elas continuam lá. O Scripta não tem servidor e não cria conta, então não existe para onde mandar. Quem quiser as mesmas notas no celular escolhe uma pasta da própria nuvem (Drive, OneDrive) e os dois aparelhos se falam por ela.</p>
+      <p class="note">O app é <b>gratuito</b>. Sincronizar entre aparelhos, abas e personalização vêm no <b>Scripta Pro</b>, que é compra única e ainda não está à venda.</p>
+    </section>
+
+    <footer>
+      <span>Feito por SadraqueSP</span>
+      <a href="https://github.com/SadraqueSP/scripta/releases">Todas as versões</a>
+    </footer>
+
+  </div>
+</main>
+</body>
+</html>
