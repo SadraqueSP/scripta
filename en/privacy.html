@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scripta Privacy Policy</title>
+<meta name="description" content="What Scripta keeps, where it keeps it and what never leaves your device.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Work+Sans:wght@400;500;600&display=swap">
+<style>
+/* Mesmas cores e fontes da pagina de download. */
+:root {
+  --paper: #F8F3E9;
+  --paper-sunk: #F4EDE0;
+  --rule: #BFB39A;
+  --ink: #221F1A;
+  --ink-soft: #6E675B;
+  --accent: #2B4C7E;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1A1813;
+    --paper-sunk: #141210;
+    --rule: #585141;
+    --ink: #EAE2D2;
+    --ink-soft: #A9A08D;
+    --accent: #8FB0DC;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #1A1813;
+  --paper-sunk: #141210;
+  --rule: #585141;
+  --ink: #EAE2D2;
+  --ink-soft: #A9A08D;
+  --accent: #8FB0DC;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Work Sans", "Segoe UI", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+}
+main {
+  max-width: 660px;
+  margin: 0 auto;
+  padding: clamp(32px, 7vw, 72px) clamp(20px, 5vw, 28px) 72px;
+}
+.written {
+  border-left: 1px solid var(--rule);
+  padding-left: clamp(18px, 4vw, 30px);
+}
+h1 {
+  font-family: Lora, Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(1.9rem, 5vw, 2.4rem);
+  line-height: 1.2;
+  margin: 0 0 6px;
+  text-wrap: balance;
+}
+h2 {
+  font-family: Lora, Georgia, serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin: 34px 0 8px;
+  text-wrap: balance;
+}
+p, li { max-width: 64ch; }
+p { margin: 0 0 12px; }
+ul { margin: 0 0 12px; padding-left: 22px; }
+li { margin-bottom: 4px; }
+code {
+  background: var(--paper-sunk);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0 4px;
+  font-size: .92em;
+}
+.data {
+  color: var(--ink-soft);
+  font-size: .95rem;
+  margin: 0 0 28px;
+}
+a { color: var(--accent); }
+footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+  font-size: .9rem;
+  color: var(--ink-soft);
+}
+</style>
+</head>
+<body>
+<main>
+  <div class="written">
+    <h1>Privacy Policy - Scripta</h1>
+    <p class="data">Last updated: 2026-09-09</p>
+    <p>Scripta is a note taking app for Android and Windows, with folders, tags, images, tables, code and reminders inside the notes.</p>
+    <h2>What is saved</h2>
+    <p>The app keeps, on your device only:</p>
+    <ul>
+      <li>the text of your notes</li>
+      <li>the folders you create, which folder each note is in and the tags of each note</li>
+      <li>the pinned mark and the dates of creation, change and deletion</li>
+      <li>images inserted into the notes</li>
+      <li>reminders written in the text (date and time), used only to schedule a notification on the device itself</li>
+      <li>app preferences (theme, language, font size, sorting, whether the welcome screen was shown).</li>
+    </ul>
+    <h2>Where your data lives</h2>
+    <p>Everything stays in the private storage of the device. Scripta has no account, does not use the internet (the app does not declare the internet permission), has no server of its own and does not sell data. No note is sent to anyone.</p>
+    <h2>Images</h2>
+    <p>To insert an image you pick a photo through the system photo picker or take a new one with the camera. The image is copied into the private folder of the app. The app does not read any other photo from your gallery and does not ask for a media reading permission.</p>
+    <h2>Notes with a password</h2>
+    <p>When you protect a note, its text is encrypted on the device (AES-256-GCM, key derived from the password with PBKDF2) and stays encrypted in the backup. The password is never stored or sent anywhere; without it, the note cannot be recovered. Images of that note stay in the private folder of the app, without encryption.</p>
+    <h2>Encrypting the notes on this device</h2>
+    <p>Under Settings &gt; Lock you can store the notes file encrypted (AES-256-GCM) with a key derived from the app password. The key stays in memory while the app is open and, if biometrics are on, in the system vault (Android Keystore or Windows Hello), so your fingerprint can open the app. Without the password or the biometrics, that file cannot be opened by anyone, including the developer.</p>
+    <p>With that option on, the same key also encrypts the file this device writes into the sync folder, and the manual backup can be created encrypted (see below). The format is always the same: an <code>NPX1</code> signature, the salt of the password, a fresh nonce for every write and the content in AES-256-GCM.</p>
+    <p>What <strong>is encrypted</strong>: the notes file on the device, the file this device writes into the sync folder and the protected backup (<code>.scripta</code>).</p>
+    <p>What is <strong>not encrypted</strong>, on purpose: the images. They remain ordinary files in the private folder of the app and, when syncing, in the <code>images</code> subfolder of the shared folder. It is the same rule that already applies to images of password protected notes. Whoever can reach that folder sees the photos, but not the text of the notes. App preferences (theme, font, device name) are also kept in plain text.</p>
+    <p>The key for the files in the shared folder is derived from the app password plus a <strong>salt kept in the folder itself</strong> (the file <code>notepadx-sync.salt</code>, 16 random bytes). A salt is not a secret: it only prevents someone from using a ready made table of passwords. It exists so that two devices with the SAME app password reach the SAME key and can read each other&#x27;s files.</p>
+    <p>For that to work, the app password is kept in the system vault (Keystore on Android, DPAPI on Windows), the same way the key already was. It never leaves the device.</p>
+    <p>With different passwords, each device writes a file the other cannot open, and the app reports that as an ERROR, both in the sync icon and in the Sync screen, together with what to do about it.</p>
+    <p>App preferences (theme, colors, font, view mode, language, reminders, correction rules) travel along with the notes, in the same file and with the same encryption. What does <strong>not</strong> travel, because it is a decision of each device: the sync folder, the automatic sync switch, the device name and everything tied to file permissions or to the system vault.</p>
+    <h2>Reminders and notifications</h2>
+    <p>A reminder is a date and time written in the note. The app schedules a local notification, delivered by the system of the device itself; nothing is sent to any server. The notification permission (and, on Android, the exact alarm one) is used only for that.</p>
+    <h2>Widget and sharing into Scripta (Android)</h2>
+    <p>The home screen widget shows the titles of the five most recent notes, kept in the app preferences on the device. When you share text from another app into Scripta, that text becomes a new note; nothing is sent back.</p>
+    <h2>App password and biometrics</h2>
+    <p>The app password is a gate at the entrance: it is stored only as a derived verifier (PBKDF2 + SHA-256), never in plain text, and it does not leave the device. Unlocking by biometrics uses the Android system; the app never receives or stores biometric data, only the answer (recognized or not).</p>
+    <h2>Links</h2>
+    <p>A link in a note is only text kept on the device. When you tap it, the address is handed to the browser you choose; Scripta does not reach the network (it does not have the internet permission) and does not fetch the title, the image or any other data from the page. That is why the link card shows only what is written in the note: the label and the domain.</p>
+    <h2>Sharing</h2>
+    <p>When you use Share, the system lists the available apps and you choose the destination and the format (text, PDF or PNG image). What is sent is the text of the note and, if there are any, its images. Save as… and Save to gallery write a file only where you choose.</p>
+    <h2>Backup</h2>
+    <p>A manual backup creates one file with notes, folders and images, and you choose where to keep it (Google Drive, OneDrive, Files or any other app). Restoring merges that file with your current notes without erasing anything.</p>
+    <p>There are two forms of the same content:</p>
+    <ul>
+      <li><strong><code>.json</code>, in plain text</strong> (the way it has always been): it can be opened and read by any program, including the cloud service where you keep it. Notes with their own password stay encrypted inside it; the rest does not.</li>
+      <li><strong><code>.scripta</code>, encrypted</strong> with the app password, when you turn on &quot;Protect the backup with the app password&quot; under Settings &gt; Backup. In that case nothing inside the file can be read without the password, neither the notes, nor the folder names, nor the images, which in this case travel encrypted with the rest.</li>
+    </ul>
+    <p>The protected backup keeps the salt of the password used at the time of export, and the key is derived from it when restoring. That way an old backup still opens with the password that was valid when it was made, even if the app password changed afterwards. Without that password the file cannot be recovered by anyone, including the developer.</p>
+    <p>Android may also include notes, folders and preferences in the system Auto Backup, without the images, if that feature is active in the Google account of the device.</p>
+    <h2>Deleting</h2>
+    <p>Deleted notes stay in the trash for 30 days and are then erased. Under Settings you can erase every note, folder and image at once.</p>
+    <h2>Permissions</h2>
+    <p>The app asks for no location, contacts, internet or gallery reading permission. The camera is used only when you choose to take a photo for a note. The biometric permission is used only if you turn on unlocking by fingerprint or face.</p>
+    <p>Access to all files: requested ONLY if you set up sync through a shared folder (which, with automatic sync on, runs when the app opens, when you come back to it, shortly after an edit and every five minutes), and never when the app starts. It exists so that Scripta can write and read the sync files in the folder YOU chose. The app does not scan your storage, does not read other folders and does not send anything anywhere: whoever carries that folder to the cloud, if you want that, is another app of your choice. Without that permission the rest of Scripta works the same; only folder sync becomes unavailable.</p>
+    <footer>
+      <a href="./">Back to the Scripta page</a>
+      <a href="../privacidade.html" style="margin-left:18px">Portugues</a>
+    </footer>
+  </div>
+</main>
+</body>
+</html>
