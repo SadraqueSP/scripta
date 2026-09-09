@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Politica de Privacidade do Scripta</title>
+<meta name="description" content="O que o Scripta guarda, onde guarda e o que nunca sai do seu aparelho.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Work+Sans:wght@400;500;600&display=swap">
+<style>
+/* Mesmas cores e fontes da pagina de download. */
+:root {
+  --paper: #F8F3E9;
+  --paper-sunk: #F4EDE0;
+  --rule: #BFB39A;
+  --ink: #221F1A;
+  --ink-soft: #6E675B;
+  --accent: #2B4C7E;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1A1813;
+    --paper-sunk: #141210;
+    --rule: #585141;
+    --ink: #EAE2D2;
+    --ink-soft: #A9A08D;
+    --accent: #8FB0DC;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #1A1813;
+  --paper-sunk: #141210;
+  --rule: #585141;
+  --ink: #EAE2D2;
+  --ink-soft: #A9A08D;
+  --accent: #8FB0DC;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Work Sans", "Segoe UI", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+}
+main {
+  max-width: 660px;
+  margin: 0 auto;
+  padding: clamp(32px, 7vw, 72px) clamp(20px, 5vw, 28px) 72px;
+}
+.written {
+  border-left: 1px solid var(--rule);
+  padding-left: clamp(18px, 4vw, 30px);
+}
+h1 {
+  font-family: Lora, Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(1.9rem, 5vw, 2.4rem);
+  line-height: 1.2;
+  margin: 0 0 6px;
+  text-wrap: balance;
+}
+h2 {
+  font-family: Lora, Georgia, serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin: 34px 0 8px;
+  text-wrap: balance;
+}
+p, li { max-width: 64ch; }
+p { margin: 0 0 12px; }
+ul { margin: 0 0 12px; padding-left: 22px; }
+li { margin-bottom: 4px; }
+code {
+  background: var(--paper-sunk);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0 4px;
+  font-size: .92em;
+}
+.data {
+  color: var(--ink-soft);
+  font-size: .95rem;
+  margin: 0 0 28px;
+}
+a { color: var(--accent); }
+footer {
+  margin-top: 44px;
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+  font-size: .9rem;
+  color: var(--ink-soft);
+}
+</style>
+</head>
+<body>
+<main>
+  <div class="written">
+    <h1>Política de Privacidade - Scripta</h1>
+    <p class="data">Última atualização: 08/09/2026</p>
+    <p>O Scripta é um bloco de notas para Android e Windows, com pastas, etiquetas, imagens, tabelas, código e lembretes dentro das notas.</p>
+    <h2>Dados salvos</h2>
+    <p>O app guarda, apenas no aparelho:</p>
+    <ul>
+      <li>texto das notas</li>
+      <li>pastas criadas, a pasta de cada nota e as etiquetas de cada nota</li>
+      <li>marcação de nota fixada e datas de criação, modificação e exclusão</li>
+      <li>imagens inseridas nas notas</li>
+      <li>lembretes marcados no texto (data e hora), usados só para agendar a notificação no próprio aparelho</li>
+      <li>preferências do app (tema, idioma, tamanho da letra, ordenação, boas-vindas exibidas).</li>
+    </ul>
+    <h2>Onde os dados ficam</h2>
+    <p>Tudo fica no armazenamento privado do aparelho. O Scripta não tem conta, não usa internet (o app não declara a permissão de internet), não possui servidor próprio e não vende dados. Nenhuma nota é enviada para terceiros.</p>
+    <h2>Imagens</h2>
+    <p>Ao inserir uma imagem, você escolhe a foto pelo seletor de fotos do sistema ou tira uma nova pela câmera. A imagem é copiada para a pasta privada do app. O app não lê nenhuma outra foto da galeria e não pede permissão de leitura de mídia.</p>
+    <h2>Notas com senha</h2>
+    <p>Ao proteger uma nota, o texto é criptografado no aparelho (AES-256-GCM, chave derivada da senha com PBKDF2) e permanece assim no backup. A senha não é guardada nem enviada a lugar nenhum; sem ela, a nota não pode ser recuperada. As imagens da nota ficam na pasta privada do app, sem criptografia.</p>
+    <h2>Criptografia das notas no aparelho</h2>
+    <p>Em Ajustes &gt; Bloqueio é possível gravar o arquivo de notas criptografado (AES-256-GCM) com uma chave derivada da senha do app. A chave fica em memória enquanto o app está aberto e, se a biometria estiver ligada, guardada no cofre do sistema (Keystore do Android ou Windows Hello), para a digital abrir o app. Sem a senha ou a biometria, o arquivo não pode ser aberto por ninguém, nem pelo desenvolvedor.</p>
+    <p>Com essa opção ligada, a mesma chave cifra também o arquivo que este aparelho grava na pasta de sincronização, e o backup manual pode ser gerado cifrado (veja abaixo). O formato é sempre o mesmo: assinatura <code>NPX1</code>, o salt da senha, um nonce novo a cada gravação e o conteúdo em AES-256-GCM.</p>
+    <p>O que <strong>fica cifrado</strong>: o arquivo de notas no aparelho, o arquivo deste aparelho na pasta de sincronização e o backup protegido (<code>.scripta</code>).</p>
+    <p>O que <strong>não fica cifrado</strong>, de propósito: as imagens. Elas continuam sendo arquivos comuns na pasta privada do app e, na sincronização, na subpasta <code>images</code> da pasta compartilhada — a mesma regra que já vale para as imagens de notas protegidas por senha. Quem tiver acesso a essa pasta vê as fotos, mas não o texto das notas. As preferências do app (tema, fonte, nome do aparelho) também ficam em claro.</p>
+    <p>A chave dos arquivos da pasta compartilhada é derivada da senha do app somada a um <strong>salt guardado na própria pasta</strong> (arquivo <code>notepadx-sync.salt</code>, 16 bytes aleatórios). Salt não é segredo: ele só impede que alguém use uma tabela pronta de senhas. Ele existe para que dois aparelhos com a MESMA senha do app cheguem à MESMA chave e consigam ler os arquivos um do outro.</p>
+    <p>Para isso, a senha do app fica guardada no cofre do sistema (Keystore no Android, DPAPI no Windows), do mesmo jeito que a chave já ficava. Ela nunca sai do aparelho.</p>
+    <p>Com senhas diferentes, cada aparelho grava um arquivo que o outro não consegue abrir, e o app mostra isso como ERRO — no ícone de sincronização e na tela de Sincronização, com o que fazer para resolver.</p>
+    <p>As preferências do app (tema, cores, letra, modo de exibição, idioma, lembretes, regras de correção) viajam junto das notas, no mesmo arquivo e com a mesma criptografia. <strong>Não viajam</strong>, porque são decisão de cada aparelho: a pasta de sincronização, o interruptor de sincronizar sozinho, o nome do aparelho e tudo ligado à permissão de arquivos ou ao cofre do sistema.</p>
+    <h2>Lembretes e notificações</h2>
+    <p>Um lembrete é uma data e hora escritas na nota. O app agenda uma notificação local, entregue pelo próprio sistema do aparelho; nada é enviado a servidores. A permissão de notificações (e, no Android, a de alarmes exatos) é usada só para isso.</p>
+    <h2>Widget e compartilhar para o Scripta (Android)</h2>
+    <p>O widget da tela inicial mostra os títulos das cinco notas mais recentes, guardados nas preferências do app no aparelho. Ao compartilhar um texto de outro app para o Scripta, esse texto vira uma nota nova; nada é enviado de volta.</p>
+    <h2>Senha do app e biometria</h2>
+    <p>A senha do app é um portão de entrada: fica guardada apenas como verificador derivado (PBKDF2 + SHA-256), nunca em texto puro, e não sai do aparelho. O desbloqueio por biometria usa o sistema do Android; o app não recebe nem armazena dados biométricos, apenas o resultado (reconhecido ou não).</p>
+    <h2>Links</h2>
+    <p>Um link na nota é apenas texto guardado no aparelho. Ao tocar nele, o endereço é entregue ao navegador que você escolher; o Scripta não acessa a rede (não tem a permissão de internet) e não busca título, imagem nem qualquer dado da página. Por isso o cartão de link mostra só o que está escrito na nota: o rótulo e o domínio.</p>
+    <h2>Compartilhamento</h2>
+    <p>Quando você usa Compartilhar, o sistema mostra os apps disponíveis e você escolhe o destino e o formato (texto, PDF ou imagem PNG). O conteúdo enviado é o texto da nota e, se houver, as imagens dela. Salvar em… e Salvar na galeria gravam um arquivo apenas no local que você escolher.</p>
+    <h2>Backup</h2>
+    <p>O backup manual gera um arquivo único com notas, pastas e imagens, e você escolhe onde guardá-lo (Google Drive, OneDrive, Arquivos ou outro app). A restauração mescla o arquivo com as notas atuais sem apagar nada.</p>
+    <p>São duas formas do mesmo conteúdo:</p>
+    <ul>
+      <li><strong><code>.json</code>, em texto puro</strong> (o padrão de sempre): pode ser aberto e lido por qualquer programa, inclusive pelo serviço de nuvem onde você guardá-lo. As notas protegidas por senha própria continuam cifradas dentro dele; o resto, não.</li>
+      <li><strong><code>.scripta</code>, cifrado</strong> com a senha do app, quando você liga &quot;Proteger o backup com a senha do app&quot; em Ajustes &gt; Backup. Aí nada dentro do arquivo é legível sem a senha — nem as notas, nem os nomes das pastas, nem as imagens, que nesse caso viajam cifradas junto com o resto.</li>
+    </ul>
+    <p>O backup protegido guarda o salt da senha usada na hora da exportação, e é dele que a chave é derivada na restauração. Assim um backup antigo continua abrindo com a senha que valia quando ele foi feito, mesmo que a senha do app tenha mudado depois. Sem essa senha o arquivo não pode ser recuperado por ninguém, nem pelo desenvolvedor.</p>
+    <p>O Android também pode incluir notas, pastas e preferências no Auto Backup do sistema, sem as imagens, caso esse recurso esteja ativo na conta Google do aparelho.</p>
+    <h2>Exclusão</h2>
+    <p>Notas excluídas ficam na lixeira por 30 dias e depois são apagadas. Em Configurações é possível apagar todas as notas, pastas e imagens de uma vez.</p>
+    <h2>Permissões</h2>
+    <p>O app não pede permissão de localização, contatos, internet ou leitura da galeria. A câmera é usada apenas quando você escolhe tirar uma foto para a nota. A permissão de biometria é usada somente se você ativar o desbloqueio por digital ou rosto.</p>
+    <p>Acesso a todos os arquivos: pedido SOMENTE se você configurar a sincronização por pasta compartilhada (que, com o automático ligado, roda ao abrir o app, ao voltar a ele, pouco depois de editar e a cada cinco minutos), e nunca na abertura do app. Ele serve para o Scripta gravar e ler os arquivos de sincronização na pasta que VOCÊ escolher. O app não varre o armazenamento, não lê outras pastas e não envia nada para lugar nenhum: quem leva a pasta para a nuvem, se você quiser, é outro app da sua escolha. Sem essa permissão, o resto do Scripta funciona igual; só a sincronização por pasta fica indisponível.</p>
+    <footer><a href="./">Voltar para a pagina do Scripta</a></footer>
+  </div>
+</main>
+</body>
+</html>
