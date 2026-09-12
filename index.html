@@ -159,14 +159,21 @@ p:last-child { margin-bottom: 0; }
 }
 .warning h2 { color: var(--warn); }
 .steps { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
+/* Recuo com o marcador posicionado, e NÃO uma grade: num container de
+   grade cada pedaço do conteúdo vira um item, então o <kbd> no meio da
+   frase caía para a linha de baixo e o texto seguinte atropelava em
+   cima (achado pelo dono, 12/09/2026). Assim a frase segue inteira, e
+   negrito, link ou qualquer marcação no meio dela continuam no lugar. */
 .steps li {
-  display: grid;
-  grid-template-columns: 1.6em 1fr;
-  align-items: baseline;
+  position: relative;
+  padding-left: 1.6em;
   font-size: .97rem;
 }
 .steps li::before {
   content: "☐";
+  position: absolute;
+  left: 0;
+  top: 0;
   color: var(--warn);
   font-size: 1.05em;
 }
