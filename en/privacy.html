@@ -99,7 +99,7 @@ footer {
 <main>
   <div class="written">
     <h1>Privacy Policy - Scripta</h1>
-    <p class="data">Last updated: 2026-09-12</p>
+    <p class="data">Last updated: 2026-09-29</p>
     <p>Scripta is a note taking app for Android and Windows, with folders, tags, images, tables, code and reminders inside the notes.</p>
     <h2>What is saved</h2>
     <p>The app keeps, on your device only:</p>
@@ -112,10 +112,28 @@ footer {
       <li>app preferences (theme, language, font size, sorting, whether the welcome screen was shown).</li>
     </ul>
     <h2>Where your data lives</h2>
-    <p>Everything stays in the private storage of the device. Scripta has no account, has no server of its own and does not sell data. No note is sent to anyone. On Android the app does not even declare the internet permission.</p>
+    <p>Everything stays in the private storage of the device. Scripta has no account of its own, has no server of its own and does not sell data. No note ever reaches the developer. The only time the app itself sends your notes off the device is Google account sync, which is optional and only works after you connect your account (see below).</p>
+    <h2>Sync with your Google account (optional)</h2>
+    <p>In Settings › Sync you can connect a Google account to sync your notes between your devices through Google Drive. None of this happens unless you connect.</p>
+    <p>When you connect, Google shows a screen asking for two permissions:</p>
+    <ul>
+      <li><strong>see your email address</strong>, used only to show in the app which account is connected</li>
+      <li><strong>see, edit, create and delete only the Google Drive files that Scripta creates</strong> (the <code>drive.file</code> scope). The app cannot see any other file in your Drive.</li>
+    </ul>
+    <p>What the app writes to your Drive, in a folder named <strong>Scripta</strong>:</p>
+    <ul>
+      <li>one file per device with your notes, folders, tags, reminders and app preferences (the same content as folder sync)</li>
+      <li>the images and attachments of your notes, in the <code>images</code> subfolder</li>
+      <li>automatic backups, in the <code>backups</code> subfolder, if you turn that on</li>
+      <li>a notice file asking you not to delete the folder.</li>
+    </ul>
+    <p>The data goes straight from your device to Google&#x27;s servers over an encrypted connection (HTTPS). There is no Scripta server in between, and the developer has no access to your account or your files. There, the data is kept by Google, under Google&#x27;s privacy policy. With note encryption turned on (see below), each device&#x27;s file is encrypted with the app password; images and attachments are not encrypted.</p>
+    <p>The sign-in stays on the device: the access key Google returns is kept in the system vault (Android Keystore or Windows DPAPI), and the email in the app preferences. It never leaves the device.</p>
+    <p>To stop: use Disconnect in Settings › Sync, which removes the sign-in from the device and revokes access. You can also remove Scripta&#x27;s access at any time at myaccount.google.com/permissions. To delete the data stored in Drive, delete the Scripta folder; your notes stay on your devices.</p>
+    <p>Scripta&#x27;s use and transfer to any other app of information received from Google APIs will adhere to the [Google API Services User Data Policy](https://developers.google.com/terms/api-services-user-data-policy), including the Limited Use requirements. Scripta uses this data only to sync and store your notes, does not use it for advertising, does not sell it and does not share it with anyone.</p>
     <h2>Checking for updates (Windows only)</h2>
     <p>The desktop app has a &quot;Check for updates&quot; button in Settings › About. It only runs when you click it: Scripta never checks on its own, has no timer for it and does nothing in the background.</p>
-    <p>When you click, the app asks the project&#x27;s public releases page (<code>api.github.com</code>) which version was published last and compares it with the installed one. Nothing from your notes, your device or any account is sent; GitHub, like any website, records the IP address of whoever makes the request. If you never click, the app never reaches the network. On Android there is no such button: the Play Store handles updates.</p>
+    <p>When you click, the app asks the project&#x27;s public releases page (<code>api.github.com</code>) which version was published last and compares it with the installed one. Nothing from your notes, your device or any account is sent; GitHub, like any website, records the IP address of whoever makes the request. If you never click, that request is never made. On Android there is no such button: the Play Store handles updates.</p>
     <h2>Images</h2>
     <p>To insert an image you pick a photo through the system photo picker or take a new one with the camera. The image is copied into the private folder of the app. The app does not read any other photo from your gallery and does not ask for a media reading permission.</p>
     <h2>Notes with a password</h2>
@@ -136,7 +154,7 @@ footer {
     <h2>App password and biometrics</h2>
     <p>The app password is a gate at the entrance: it is stored only as a derived verifier (PBKDF2 + SHA-256), never in plain text, and it does not leave the device. Unlocking by biometrics uses the Android system; the app never receives or stores biometric data, only the answer (recognized or not).</p>
     <h2>Links</h2>
-    <p>A link in a note is only text kept on the device. When you tap it, the address is handed to the browser you choose; Scripta does not reach the network (it does not have the internet permission) and does not fetch the title, the image or any other data from the page. That is why the link card shows only what is written in the note: the label and the domain.</p>
+    <p>A link in a note is only text kept on the device. When you tap it, the address is handed to the browser you choose; Scripta does not open the page and does not fetch the title, the image or any other data from the page. That is why the link card shows only what is written in the note: the label and the domain.</p>
     <h2>Sharing</h2>
     <p>When you use Share, the system lists the available apps and you choose the destination and the format (text, PDF or PNG image). What is sent is the text of the note and, if there are any, its images. Save as… and Save to gallery write a file only where you choose.</p>
     <h2>Backup</h2>
@@ -151,11 +169,11 @@ footer {
     <h2>Deleting</h2>
     <p>Deleted notes stay in the trash for 30 days and are then erased. Under Settings you can erase every note, folder and image at once.</p>
     <h2>Permissions</h2>
-    <p>The app asks for no location, contacts, internet or gallery reading permission. The camera is used only when you choose to take a photo for a note. The biometric permission is used only if you turn on unlocking by fingerprint or face.</p>
-    <p>Files: Scripta asks for no permission to read or write outside its own private folder. Folder sync and automatic backup write only to the folder YOU choose: on Android, through the system folder picker, which gives the app access to that folder alone (and which you can revoke at any time in the Android settings); on Windows, in the folder picked in the regular window. Sync, with automatic sync on, runs when the app opens, when you come back to it, shortly after an edit and every five minutes. The app does not scan your storage, does not read other folders and sends nothing anywhere: whoever carries that folder to the cloud, if you want that, is another app of your choice.</p>
+    <p>The app asks for no location, contacts or gallery reading permission. The internet permission exists only for Google account sync (and, on Windows, for the Check for updates button), and is only used when you turn those on. The camera is used only when you choose to take a photo for a note. The biometric permission is used only if you turn on unlocking by fingerprint or face.</p>
+    <p>Files: Scripta asks for no permission to read or write outside its own private folder. Folder sync and automatic backup write only to the folder YOU choose: on Android, through the system folder picker, which gives the app access to that folder alone (and which you can revoke at any time in the Android settings); on Windows, in the folder picked in the regular window. Sync, with automatic sync on, runs when the app opens, when you come back to it, shortly after an edit and every five minutes. The app does not scan your storage and does not read other folders. With folder sync, whoever carries that folder to the cloud, if you want that, is another app of your choice.</p>
     <h2>Contact</h2>
     <p>A question, a problem or a suggestion: folhaversosuporte@gmail.com. Scripta is published by Folhaverso, who answers at that address.</p>
-    <p>Writing is the only way back there is: the app collects nothing, has no account and sends no crash reports, so nobody here learns that you ran into a problem until you say so.</p>
+    <p>Writing is the only way back there is: the app collects nothing, has no account of its own and sends no crash reports, so nobody here learns that you ran into a problem until you say so.</p>
     <footer>
       <a href="./">Back to the Scripta page</a>
       <a href="../privacidade.html" style="margin-left:18px">Portugues</a>
